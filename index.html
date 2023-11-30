@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call roll</title>
+    <style>
+        body{
+    background-color: black;
+    color: white;
+}
+#pan{
+    text-align: center;
+    margin-top: 5%;
+}
+.clu{
+    font-size: larger;
+    border-radius: 10px;
+    width: 5%;
+    background: rgb(49, 47, 47);
+    color: whitesmoke;
+}
+.clp{
+    font-size: xx-large;
+}
+.btn{
+    font-size: xx-large;
+    margin-top: 2%;
+    background-color: bisque;
+    border-radius: 10px;
+}
+.box{
+    width: 25px;
+    height: 25px;
+}
+
+    </style>
+</head>
+<button class="btn" onclick="refresh()">refresh</button>
+<center>
+     <div id="pan">
+        <span class="clp">class :~ </span>
+        <input type="text" placeholder="class" id="cls" class="clu"/>
+        <span class="clp">total student :~ </span>
+        <input type="text" placeholder="student" id="inpot" class="clu"/>
+    <center>
+        <button class="btn" onclick="listyfy()">click</button>
+    </center>
+       </div>
+</center>
+    <script>
+        let pan =document.getElementById("pan");
+let roll=document.getElementById("inpot");
+let clas=document.getElementById("cls");
+let ct=new Date();
+function listyfy(){
+    let troll=roll.value;    
+    let cls=clas.value;
+    let rr=`<h3>class  ${cls}</h3>`;
+    for(let i=1;i<=troll;i++){
+        rr+=`<h1>${i}- <input type="checkbox" id="${i}" class="box"></h1>`;}
+    rr+=`<button class="btn" onclick="result()">done</button>`;
+    pan.innerHTML=rr;}
+function result(){
+    k={};
+    k["date"]=ct.toLocaleDateString();
+    let trol=roll.value;
+    let cl=clas.value;
+    k["class"]=cl;
+    for(let i=1;i<=trol;i++){
+        let xx=document.getElementById(`${i}`);
+        if(xx.checked==true){
+            k[i]=1;
+        }else{k[i]=0;}}
+    let vp=JSON.stringify(k);
+    u=`<br><button class="btn" id="mn">copy</button>`;
+    pan.innerHTML=`<h1>${vp}</h1>`+u;
+    let mn=document.getElementById("mn");
+    mn.addEventListener('click',()=>{
+        navigator.clipboard.writeText(vp);})}
+function refresh(){
+    window.location.reload();}
+    </script>
+</body>
+</html>
